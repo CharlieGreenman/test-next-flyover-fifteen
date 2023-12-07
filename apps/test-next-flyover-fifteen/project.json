@@ -1,0 +1,61 @@
+{
+  "name": "test-next-flyover-fifteen",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/test-next-flyover-fifteen",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "@nx/next:build",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "outputPath": "dist/apps/test-next-flyover-fifteen"
+      },
+      "configurations": {
+        "development": {
+          "outputPath": "apps/test-next-flyover-fifteen"
+        },
+        "production": {}
+      }
+    },
+    "serve": {
+      "executor": "@nx/next:server",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "test-next-flyover-fifteen:build",
+        "dev": true
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "test-next-flyover-fifteen:build:development",
+          "dev": true
+        },
+        "production": {
+          "buildTarget": "test-next-flyover-fifteen:build:production",
+          "dev": false
+        }
+      }
+    },
+    "export": {
+      "executor": "@nx/next:export",
+      "options": {
+        "buildTarget": "test-next-flyover-fifteen:build:production"
+      }
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "apps/test-next-flyover-fifteen/jest.config.ts"
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/test-next-flyover-fifteen/**/*.{ts,tsx,js,jsx}"]
+      }
+    }
+  },
+  "tags": []
+}
